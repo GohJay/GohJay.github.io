@@ -22,6 +22,9 @@
 * img {
   max-width: 100%;
 }
+a {
+	color: var(--white-1);
+}
 html,
 body {
   color: var(--white-2);

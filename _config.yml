@@ -1,18 +1,21 @@
-title: Jekyll Serial Programmer
+title: Developer Jay
 markdown: kramdown
-url: ""
-baseurl: "/jekyll-theme-serial-programmer"
+url: "http://127.0.0.1:4000"
+baseurl: ""
 
 # for atom feed
 author:
-  name: Sharad Raj Singh Maurya
-  email: dev_sharad@outlook.com
+  name: GohJay
+  email: kojh6763@gmail.com
 
 plugins:
   - jemoji
   - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-feed
+  - jekyll-paginate
+paginate: 7
+paginate_path: "/posts/:num"
 
 collections_dir: all_collections
 collections:
