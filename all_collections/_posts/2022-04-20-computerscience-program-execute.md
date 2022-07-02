@@ -48,9 +48,9 @@ categories:
 
 ![image](https://user-images.githubusercontent.com/51254582/164413451-9e048e11-989a-4cac-99f0-082c2b229d5c.png)
 
- - 명령어의 내용이 산술 및 논리연산이라면 산술 및 논리 연산을 하는 Execution의 주체는 ALU(Arithmetic Logic Unit)이다.
- - Decode단계는 CPU안에 있는 컨트롤 유닛이 Decode 즉 명령어 해석을 진행한다.
  - 메인메모리에서 CPU로 가져온 명령어는 레지스터에 저장된다. 레지스터 중에서도 IR(Instruction Register)이라 불리는 레지스터에 저장된다.
+ - 컨트롤 유닛(Control Unit)은 CPU를 제어하는하는 부품이다. 컨트롤 유닛은 명령어를 해석하고 레지스터와 ALU 사이의 명령 흐름을 제어한다.
+ - 명령어의 내용이 산술 및 논리연산이라면 산술 및 논리 연산을 하는 Execution의 주체는 ALU(Arithmetic Logic Unit)이다.
 
 <br/>
 
