@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[ComputerScience] 캐시무효화!"
+title: "[ComputerScience] 캐시무효화"
 tags: 
 categories:
   - ComputerScience
@@ -26,6 +26,3 @@ categories:
 |---|---|---|
 |1|`Write-Through`|값이 변경 되었을 경우 물리 메모리 까지 가서 값 변경<br/>Instruction Cache 에서 사용하는 방식|
 |2|`Write-Back`|값이 변경 되었을 경우 L1 캐시메모리만 변경 한다.<br/>해당 캐시 라인이 제거 될 때 물리 메모리에 반영 된다.<br/>Data Cache 에서 사용하는 방식|
-
- - [TIP] Store buffer 존재로 인해 쓰레드간 동기화와 캐시메모리간 동기화를 착각할 수 있으나 캐시메모리간 동기화는(캐시무효화) 무조건 성립 된다.
- 
