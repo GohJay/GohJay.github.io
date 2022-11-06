@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "[ComputerScience] 가상메모리와 페이징기법"
+title: "[OperatingSystem] 가상메모리와 페이징기법"
 tags: 
 categories:
-  - ComputerScience
+  - OperatingSystem
 ---
 
 ## Intro
