@@ -21,10 +21,10 @@ categories:
  - CPU가 어떤 하나의 스레드를 실행하고 있는 상태에서 OS의 스케줄링 요청으로(인터럽트) 인해 다음 스레드가 실행되어야 할 때, 기존의 스레드의 상태 또는 레지스터 값을(Context) 저장하고 CPU가 다음 스레드를 수행할 수 있도록 새로운 스레드의 상태 또는 레지스터 값을(Context) 교체하는 작업을 Context Switching 이라 한다.
  - CPU는 하나의 작업을(최소 단위 오퍼레이션) 마칠 때마다 OS의 인터럽트 요청이 있었는지 확인하고 이를 수행하기 때문에 MOV, CMP와 같은 최소 단위 오퍼레이션의 수행 중간에 Context Switching 되지는 않는다.
 
-![image](https://user-images.githubusercontent.com/51254582/204524197-c5c74744-caf3-4eaf-b681-3c8ef622ef95.png)
+![image](https://user-images.githubusercontent.com/51254582/204843777-6aa53f36-2a50-43dd-bf78-abc8dca208fa.png)
 
  - 멀티 스레드 환경에서 위 그림과 같이 전역 변수 int a 의 값을 ++ 연산하는 상황을 예로 들어보도록 하자.
- - CPU[0] 에서 0이 담긴 a 값을 eax 레지스터에 Load 한 상황에서 Context Switching 되고 CPU[1] 이 a 의 값을 ++ 연산한 후 Store 까지 마친다면, 실제 메모리에는 a 값이 1로 존재하지만 CPU[0] 의 eax 레지스터는 과거의 값 0이 담겨있으므로 ++ 연산은 보장받지 못하게 된다.
+ - 첫번째 스레드에서 0이 담긴 a 값을 eax 레지스터에 Load 한 상황에서 Context Switching 되고 다른 스레드가 a 의 값을 ++ 연산한 후 Store 까지 마친다면, 실제 메모리에는 a 값이 1로 존재하지만 첫번째 스레드의 eax 레지스터는 과거의 값 0이 담겨있으므로 ++ 연산은 보장받지 못하게 된다.
  - 이를 해결하기 위해서는 멀티 스레드 환경에서 a와 같은 공유자원을 사용할 때 어느 시점에 하나의 스레드만 공유자원에 접근이 가능하도록 추가적인 코드가 들어가주어야 한다.
 
 <br/>
