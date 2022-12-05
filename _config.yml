@@ -29,3 +29,5 @@ defaults:
       layout: "post"
       permalink: /posts/:title/
 exclude: ["sitemap.xml", "feed.xml", "LICENSE", "README.md"]
+
+future: true
