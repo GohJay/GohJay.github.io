@@ -49,9 +49,13 @@ categories:
 
 ### 2.2 SRWLOCK
 
- - AcquireSRWLockExclusive 함수는 같은 스레드라도 재귀 진입을 허용하지 않기 때문에 CRITICIAL_SECTION 과 달리 TEB 정보를 가져오는 과정을 생략하고 바로 Interlocked 함수를 수행하여 이미 진입한 스레드가 있는지 확인한다. 
- - 진입한 스레드가 없을경우 키를 획득한 것으로 별다른 코드를 수행하지 않고 바로 return 한다.
- - 진입한 스레드가 있을경우 CRITICIAL_SECTION 과 마찬가지로 [WaitOnAddress](https://learn.microsoft.com/ko-kr/windows/win32/api/synchapi/nf-synchapi-waitonaddress) API 인 NtWaitForAlertByThread 함수를 call 하여 커널모드로 전환된 후 Block 상태로 돌입하고 다른 스레드가 WakeByAddressSingle 함수를 호출하여 깨워줄때까지 대기하게 된다.
+ - 마찬가지로 서로 다른 스레드가 SRWLOCK 객체를 사용하여 전역변수를 대상으로 ++연산하는 상황을 어셈블리어를 통해 분석해보도록 하자
+
+![image](https://user-images.githubusercontent.com/51254582/205931177-9f09e7c3-ec09-48c8-ab6a-99b0ca77ab77.png)
+
+ - AcquireSRWLockExclusive 함수는 같은 스레드라도 재귀 진입을 허용하지 않기 때문에 CRITICIAL_SECTION 과 달리 TEB 정보를 가져오는 과정을 생략하고 바로 Interlocked 함수를 수행하여 이미 진입한 스레드가 있는지 확인한다.
+ - 진입한 스레드가 없을 경우 키를 획득한 것으로 별다른 코드를 수행하지 않고 바로 return 한다.
+ - 진입한 스레드가 있을 경우 CRITICIAL_SECTION 과 마찬가지로 [WaitOnAddress](https://learn.microsoft.com/ko-kr/windows/win32/api/synchapi/nf-synchapi-waitonaddress) API 인 NtWaitForAlertByThread 함수를 call 하여 커널모드로 전환된 후 Block 상태로 돌입하고 다른 스레드가 WakeByAddressSingle 함수를 호출하여 깨워줄때까지 대기하게 된다.
 
 ![image](https://user-images.githubusercontent.com/51254582/205927764-dd967224-eba8-4a67-8849-8acbb7076267.png)
 
