@@ -40,7 +40,7 @@ categories:
 
 ![image](https://user-images.githubusercontent.com/51254582/205917989-67d13313-fe3d-4c78-9d21-1ac91a230979.png)
 
- - 위 과정에서 스레드ID 비교 결과가 달라 재귀 진입이 아니라고 판단되어 NtWaitForAlertByThread 가 호출되면 래핑되어있는 함수들을 호출하며 들어가서 마지막에 NtWaitForAlertByThread 라는 함수를 call 하게 된다. <br/> 이는 
+ - 위 과정에서 스레드ID 비교 결과가 달라 재귀 진입이 아니라고 판단되어 RtlpEnterCriticalSection 가 호출되면 래핑되어있는 함수들을 호출하며 들어가서 마지막에 _NtWaitForAlertByThreadId 라는 함수를 call 하게 된다. <br/> 이는 
 [WaitOnAddress](https://learn.microsoft.com/ko-kr/windows/win32/api/synchapi/nf-synchapi-waitonaddress) API 로써 Block 상태로 돌입하여 다른 스레드가 WakeByAddressSingle 함수를 호출하여 깨워줄때까지 대기하는 함수이다. <br/> 결국 CRITICIAL_SECTION 객체는 이때서야 비로서 커널모드로 전환이 발생한다.
 
 ![image](https://user-images.githubusercontent.com/51254582/205922271-42ecf5fc-2350-45f6-ad7e-22044f7854d5.png)
@@ -55,7 +55,7 @@ categories:
 
  - AcquireSRWLockExclusive 함수는 같은 스레드라도 재귀 진입을 허용하지 않기 때문에 CRITICIAL_SECTION 과 달리 TEB 정보를 가져오는 과정을 생략하고 바로 Interlocked 함수를 수행하여 이미 진입한 스레드가 있는지 확인한다.
  - 진입한 스레드가 없을 경우 키를 획득한 것으로 별다른 코드를 수행하지 않고 바로 return 한다.
- - 진입한 스레드가 있을 경우 CRITICIAL_SECTION 과 마찬가지로 [WaitOnAddress](https://learn.microsoft.com/ko-kr/windows/win32/api/synchapi/nf-synchapi-waitonaddress) API 인 NtWaitForAlertByThread 함수를 call 하여 커널모드로 전환된 후 Block 상태로 돌입하고 다른 스레드가 WakeByAddressSingle 함수를 호출하여 깨워줄때까지 대기하게 된다.
+ - 진입한 스레드가 있을 경우 CRITICIAL_SECTION 과 마찬가지로 [WaitOnAddress](https://learn.microsoft.com/ko-kr/windows/win32/api/synchapi/nf-synchapi-waitonaddress) API 인 _NtWaitForAlertByThreadId 함수를 call 하여 커널모드로 전환된 후 Block 상태로 돌입하고 다른 스레드가 WakeByAddressSingle 함수를 호출하여 깨워줄때까지 대기하게 된다.
 
 ![image](https://user-images.githubusercontent.com/51254582/205927764-dd967224-eba8-4a67-8849-8acbb7076267.png)
 
